@@ -1,4 +1,5 @@
-Security Research Report: SQL Injection Vulnerabilities in School Attendance System (SAS)Report ID: SAS-SQLI-2026-01
+Security Research Report: SQL Injection Vulnerabilities in School Attendance System (SAS)
+Report ID: SAS-SQLI-2026-01
 Version: 1.0
 Author: uksmlqzzzxc (Defender Perspective Analysis)
 Target Project: https://github.com/0mehedihasan/sas (commit 730de5a457eb4e4fe37a25b83e916bd9f1806980)
@@ -30,8 +31,6 @@ Attacker controls $Id and $dbKey via URL parameters.
 Classic tautology or UNION-based injection possible (e.g., Id=1' OR '1'='1 or time-based blind).  
 Similar patterns in edit/save (className from POST). 
 
-raw.githubusercontent.com
-
 Admin/createSessionTerm.php (Multiple operations):  INSERT/SELECT/UPDATE/DELETE all concatenate $sessionName, $termId, $Id directly.  
 Example:  php
 
@@ -39,8 +38,6 @@ $query=mysqli_query($conn,"select * from tblsessionterm where sessionName ='$ses
 $query=mysqli_query($conn,"DELETE FROM tblsessionterm WHERE Id='$Id'");
 
 Affects unauthenticated paths if session.php is bypassed; impacts shared tblsessionterm table. 
-
-raw.githubusercontent.com
 
 Other Likely Affected Files (Pattern Match):  createStudents.php, createClassArms.php, createClassTeacher.php, etc. (CRUD operations).  
 Any file using $_POST/$_GET directly in queries.
